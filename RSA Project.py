@@ -52,7 +52,7 @@ def generazione_chiavi():
 
 def apri_file_cripta():
     finestra.geometry("650x500")
-    #Pulitura schermo
+    #Clean screen
     mess_start.grid_remove()
     mess_diffie.grid_remove()
     mess_limite_sinistro.grid_remove()
@@ -68,17 +68,17 @@ def apri_file_cripta():
     label.grid_remove()
     label2.grid_remove()
     label3.grid_remove()
-    #Messaggio di wait
+    #Wait message
     mess_wait.grid(row = 0,column = 0)
     
-    #Selezionare il file
+    #Select the file
     filename = filedialog.askopenfile().name
 
-    #Legge tutto il file
+    #Read the file
     with open(filename, errors = 'ignore') as file:
         content = file.readlines()
     
-    #Generazione delle chiavi
+    #Algorithm keys generation
     p = generazione_chiavi()[0]
     q = generazione_chiavi()[1]
     n_separatori = generazione_chiavi()[2]
@@ -107,7 +107,7 @@ def apri_file_cripta():
     separatore = ""
     finale = 0
     
-    #Creazione del file e salvataggio dei dati del criptaggio del file selezionato: |percorsofile|data|d|n|
+    #File creation and saving of the encrypted file
     presente = 0
     try:
         archivio = open("Archivio.txt","r")
@@ -169,7 +169,7 @@ def apri_file_cripta():
         #archivio.write(str(n) + "\n")
         #archivio.close()
         
-        #Posizionamento
+        #Positioning
         mess_wait.grid_remove()
         mess_open.grid(row = 0,column = 0)
         save.grid(row = 1,column = 0)
@@ -191,7 +191,7 @@ def salva_file():
         
 def apri_file_decripta():
     finestra.geometry("650x500")
-    #Pulitura schermo
+    #Clean screen
     mess_start.grid_remove()
     mess_diffie.grid_remove()
     mess_limite_sinistro.grid_remove()
@@ -210,7 +210,7 @@ def apri_file_decripta():
     label2.grid_remove()
     label3.grid_remove()
 
-    #Selezionare il file
+    #Select the file
     filename = filedialog.askopenfile().name
     with open(filename, errors = 'ignore') as file:
         content = file.readlines()
@@ -218,7 +218,7 @@ def apri_file_decripta():
     with open("Archivio.txt") as file2:
         content2 = file2.readlines()
 
-    #Recuperate le chiavi d e n    
+    #Obtained the keys d and n    
     d = 0
     n = 0
     percorso_vecchio = ""
@@ -235,7 +235,7 @@ def apri_file_decripta():
                 cont = cont + 6
     
     
-    #Riarrangiamento del file ed eliminazione caratteri inutili
+    #Re-arranging of the file + data cleaning
     numero = ""
     lista2 = []
     lista1 = []
@@ -255,9 +255,9 @@ def apri_file_decripta():
 
     nome = os.path.split(filename)
     
-    base1 = os.path.basename(nome[1])  #solo nome + estensione
-    base=base1[:(len(base1)-4)]  #solo nome (ho dovuto tagliarlo)
-    f,ext=os.path.splitext(filename)  #con ext ho solo l'estensione (con f tutto il file)
+    base1 = os.path.basename(nome[1])
+    base=base1[:(len(base1)-4)]
+    f,ext=os.path.splitext(filename)
     
     nuovo_nome = f + "_decrypted" + ext
     print (nuovo_nome)
@@ -278,7 +278,7 @@ def apri_file_decripta():
     
 def chiavi():
     finestra.geometry("650x500")
-    #Pulitura schermo
+    #Clean screen
     mess_start.grid_remove()
     mess_open.grid_remove()
     save.grid_remove()
@@ -289,7 +289,7 @@ def chiavi():
     label2.grid_remove()
     label3.grid_remove()
     
-    #Posizionamento
+    #Positioning
     mess_diffie.grid(row = 0,column = 0)
     mess_limite_sinistro.grid(row = 1,column = 0)
     mess_limite_destro.grid(row = 2,column = 0)
@@ -336,7 +336,7 @@ def setta_chiavi():
 
 def informazioni():
     finestra.geometry("900x500")
-    #Pulitura schermo
+    #Clean screen
     mess_start.grid_remove()
     mess_diffie.grid_remove()
     mess_limite_sinistro.grid_remove()
@@ -370,14 +370,14 @@ def uscita():
     if (risposta):
         finestra.destroy()
 
-#Creazione della finestra        
+#Window creation        
 finestra = Tk()
 finestra.geometry("650x500")
 finestra.title("DIFFIE HELMANN ALGORITHM ENCRYPTION")
 finestra.configure(bg = 'cyan')
 finestra.resizable(False,False)
 
-#Creazione della pagina iniziale
+#Initial page creating
 mess_start = Message(finestra,aspect = 1500)
 mess_start["text"] = "WELCOME TO THE DIFFIE HELLMAN ALGORITHM ENCRYPTION PROGRAM!!!"
 mess_start["bg"] = "cyan"
@@ -399,7 +399,7 @@ mess_start.grid(row = 0,column = 0)
 ##decrypta["command"] = apri_file_decripta
 ##decrypta.grid(row = 3,column = 0)
 
-#Creazione del menu con aggiunta delle opzioni
+#Menu + options creation
 barra_menu = Menu(finestra)
 menu_file = Menu(barra_menu, tearoff = 0)
 barra_menu.add_cascade(label = "File", menu = menu_file)
@@ -409,7 +409,7 @@ menu_file.add_command(label = "Diffie Hellman Settings", command = chiavi)
 menu_file.add_command(label = "About Diffie Helmann", command = informazioni)
 menu_file.add_command(label = "Exit", command = uscita)
 
-#Creazione pagina: Diffie Holmann Settings
+#Diffie Holmann Settings Page creating
 limitesinistro = Text(finestra,height = 1,width = 20)
 limitedestro = Text(finestra,height = 1,width = 20)
 separatori = Text(finestra,height = 1,width = 20)
@@ -442,7 +442,7 @@ setlimits["text"] = "SET LIMITS"
 setlimits["bg"] = "red"
 setlimits["command"] = setta_chiavi
 
-#Creazione pagina: Open & Encrypt
+#Open & Encrypt Page Creation
 mess_open = Message(finestra,aspect = 700)
 mess_open["text"] = "FILE PROPERLY ENCRYPTED!!!"
 mess_open["font"] = "Verdena 12 bold"
@@ -461,7 +461,7 @@ mess_wait["font"] = "Verdena 12 bold"
 mess_wait["fg"] = "blue"
 mess_wait["bg"] = "cyan"
 
-#Creazione pagina informazioni
+#Page creationg: information
 riga0 = Message(finestra,aspect = 900)
 riga0["text"] = "HISTORY AND GENERAL INFORMATION\n"
 riga0["font"] = "Verdena 14 bold"
@@ -499,7 +499,7 @@ photo3 = PhotoImage(file = path3)
 label3 = Label(image = photo3)
 label3.image = photo3
 
-#Assegnazione della barra del menu alla finestra
+
 finestra.config(menu = barra_menu)
 
 finestra.mainloop()
